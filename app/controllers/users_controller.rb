@@ -8,8 +8,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    User.create(username: params[:user][:username], password: params[:user][:password], admin: params[:user][:admin])
-    redirect_to  new
+    User.create(user_params)
+    redirect_to  users_path
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:username, :password)
   end
 
 end
